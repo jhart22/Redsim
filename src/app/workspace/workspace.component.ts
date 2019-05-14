@@ -12,11 +12,16 @@ export class WorkspaceComponent implements AfterViewInit {
   @ViewChild('canvas') public canvas: ElementRef;
 
   //divide these values by 30 to get the size of the grid in blocks
-  @Input() public width: number = 901;
-  @Input() public height: number = 601;
+  private gridCellWidth = 30;
+  private gridCellHeight = 20;
 
-  private cellWidth = (this.width - 1) / 30;
-  private cellHeight = (this.height - 1) / 30;
+  private cellPixelWidth = 30;
+  private cellPixelHeight = 30;
+
+  private gridPixelWidth = (this.gridCellWidth * this.cellPixelWidth) + 1;
+  private gridPixelHeight = (this.gridCellHeight * this.cellPixelHeight) + 1;
+
+
 
   private context: CanvasRenderingContext2D;
 
@@ -27,8 +32,8 @@ export class WorkspaceComponent implements AfterViewInit {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.context = canvasEl.getContext('2d');
 
-    canvasEl.width = this.width;
-    canvasEl.height = this.height;
+    canvasEl.width = this.gridPixelWidth;
+    canvasEl.height = this.gridPixelHeight;
 
     this.createGrid();
   }
@@ -37,8 +42,8 @@ export class WorkspaceComponent implements AfterViewInit {
   private createGrid() {
 
     //pixel size of grid
-    var width = this.width - 1;
-    var height = this.height - 1;
+    var width = this.gridPixelWidth - 1;
+    var height = this.gridPixelHeight - 1;
 
     //set the context for drawing
     var context = this.context;
@@ -56,8 +61,8 @@ export class WorkspaceComponent implements AfterViewInit {
     }
 
     //fills in the corner pixel
-    context.moveTo(this.width-1,this.height-1);
-    context.lineTo(this.width,this.height);
+    context.moveTo(this.gridPixelWidth-1,this.gridPixelHeight-1);
+    context.lineTo(this.gridPixelWidth,this.gridPixelHeight);
 
     //draw lines
     context.strokeStyle = "black";
@@ -108,8 +113,8 @@ export class WorkspaceComponent implements AfterViewInit {
   }
 
   private updateGridGraphics(){
-    for(let x = 0; x < this.cellWidth; x++){
-      for(let y = 0; y < this.cellHeight; y++){
+    for(let x = 0; x < this.cellPixelWidth; x++){
+      for(let y = 0; y < this.cellPixelHeight; y++){
         this.updateCellGraphics(x,y);
       }
     }
