@@ -12,8 +12,8 @@ export class WorkspaceComponent implements AfterViewInit {
   @ViewChild('canvas') public canvas: ElementRef;
 
   //divide these values by 30 to get the size of the grid in blocks
-  private gridCellWidth = 30;
-  private gridCellHeight = 20;
+  private gridCellWidth = 40;
+  private gridCellHeight = 22;
 
   private cellPixelWidth = 30;
   private cellPixelHeight = 30;
@@ -49,13 +49,13 @@ export class WorkspaceComponent implements AfterViewInit {
     var context = this.context;
 
     //create the vertical lines for grid
-    for (var x = 0; x <= width; x += 30) {
+    for (var x = 0; x <= width; x += this.cellPixelWidth) {
       context.moveTo(0.5 + x, 0);
       context.lineTo(0.5 + x, height);
     }
 
     // create the horizontal lines for grid
-    for (var y = 0; y <= height; y += 30) {
+    for (var y = 0; y <= height; y += this.cellPixelHeight) {
       context.moveTo(0, 0.5 + y);
       context.lineTo(width, 0.5 + y);
     }
@@ -74,8 +74,8 @@ export class WorkspaceComponent implements AfterViewInit {
 
     var rect = event.target.getBoundingClientRect();
     //this gross formula converts mouse coordinates to grid location
-    let x = (-1* Math.ceil((rect.left - event.pageX)/30));
-    let y = (-1 * Math.ceil((rect.top - event.pageY)/30));
+    let x = (-1* Math.ceil((rect.left - event.pageX)/this.cellPixelWidth));
+    let y = (-1 * Math.ceil((rect.top - event.pageY)/this.cellPixelHeight));
 
     //this passes the changes to the logic handler
     this.gridLogic.updateGrid(x,y,this.toolSelector.getTool())
@@ -88,8 +88,8 @@ export class WorkspaceComponent implements AfterViewInit {
 
     var rect = event.target.getBoundingClientRect();
     //this gross formula converts mouse coordinates to grid location
-    let x = (-1* Math.ceil((rect.left - event.pageX)/30));
-    let y = (-1 * Math.ceil((rect.top - event.pageY)/30));
+    let x = (-1* Math.ceil((rect.left - event.pageX)/this.cellPixelWidth));
+    let y = (-1 * Math.ceil((rect.top - event.pageY)/this.cellPixelHeight));
 
     console.log(x + "," + y);
 
@@ -99,13 +99,13 @@ export class WorkspaceComponent implements AfterViewInit {
 
   //draw over the grid square according to selected tool
   private updateCellGraphics(x: number,y: number){
-    let xcoord = (30 * (x));
-    let ycoord = (30 * (y));
+    let xcoord = (this.cellPixelWidth * (x));
+    let ycoord = (this.cellPixelHeight * (y));
 
     let context = this.context;
 
     context.beginPath();
-    context.rect(xcoord+1,ycoord+1,29,29);
+    context.rect(xcoord+1,ycoord+1,this.cellPixelWidth-1,this.cellPixelHeight-1);
 
     context.fillStyle = this.parseType(this.gridLogic.getValue(x,y));
 
@@ -113,8 +113,8 @@ export class WorkspaceComponent implements AfterViewInit {
   }
 
   private updateGridGraphics(){
-    for(let x = 0; x < this.cellPixelWidth; x++){
-      for(let y = 0; y < this.cellPixelHeight; y++){
+    for(let x = 0; x < this.gridCellWidth; x++){
+      for(let y = 0; y < this.gridCellHeight; y++){
         this.updateCellGraphics(x,y);
       }
     }
