@@ -4,7 +4,7 @@ import { GridLogicService } from '../grid-logic.service';
 
 @Component({
   selector: 'app-workspace',
-  template: '<canvas #canvas (click)="onClick($event)" (dblclick)="onDoubleClick($event)"></canvas>',
+  template: '<canvas #canvas (click)="onClick($event)" (dblclick)="onDoubleClick($event)"></canvas><button (click)="decrease()">makesmall</button><button (click)="big()">makebig</button>',
   providers: [GridLogicService]
 })
 export class WorkspaceComponent implements AfterViewInit {
@@ -35,11 +35,11 @@ export class WorkspaceComponent implements AfterViewInit {
     canvasEl.width = this.gridPixelWidth;
     canvasEl.height = this.gridPixelHeight;
 
-    this.createGrid();
+    this.drawGrid();
   }
 
   //this method creates the grid
-  private createGrid() {
+  private drawGrid() {
 
     //pixel size of grid
     var width = this.gridPixelWidth - 1;
@@ -124,5 +124,39 @@ export class WorkspaceComponent implements AfterViewInit {
     if(s == "empty")
       return "white";
     return s;
+  }
+
+  private decrease(){
+    this.gridCellHeight--;
+    this.gridCellWidth--;
+
+    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
+    this.context = canvasEl.getContext('2d');
+
+    
+    this.gridPixelWidth = (this.gridCellWidth * this.cellPixelWidth) + 1;
+    this.gridPixelHeight = (this.gridCellHeight * this.cellPixelHeight) + 1;
+
+    canvasEl.width = this.gridPixelWidth;
+    canvasEl.height = this.gridPixelHeight;
+    this.drawGrid();
+    this.updateGridGraphics();
+  }
+
+  private big(){
+    this.gridCellHeight++;
+    this.gridCellWidth++;
+
+    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
+    this.context = canvasEl.getContext('2d');
+
+    
+    this.gridPixelWidth = (this.gridCellWidth * this.cellPixelWidth) + 1;
+    this.gridPixelHeight = (this.gridCellHeight * this.cellPixelHeight) + 1;
+
+    canvasEl.width = this.gridPixelWidth;
+    canvasEl.height = this.gridPixelHeight;
+    this.drawGrid();
+    this.updateGridGraphics();
   }
 }
