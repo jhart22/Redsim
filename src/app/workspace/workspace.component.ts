@@ -4,14 +4,14 @@ import { GridLogicService } from '../grid-logic.service';
 
 @Component({
   selector: 'app-workspace',
-  template: '<canvas #canvas (click)="onClick($event)" (dblclick)="onDoubleClick($event)"></canvas><button (click)="decrease()">makesmall</button><button (click)="big()">makebig</button>',
+  template: '<canvas #canvas (click)="onClick($event)" (dblclick)="onDoubleClick($event)"></canvas>',
   providers: [GridLogicService]
 })
 export class WorkspaceComponent implements AfterViewInit {
 
+  @Input() increaseSizeButton;
   @ViewChild('canvas') public canvas: ElementRef;
 
-  //divide these values by 30 to get the size of the grid in blocks
   private gridCellWidth = 40;
   private gridCellHeight = 22;
 
@@ -126,7 +126,7 @@ export class WorkspaceComponent implements AfterViewInit {
     return s;
   }
 
-  private decrease(){
+  public decreaseGridSize(){
     this.gridCellHeight--;
     this.gridCellWidth--;
 
@@ -143,7 +143,7 @@ export class WorkspaceComponent implements AfterViewInit {
     this.updateGridGraphics();
   }
 
-  private big(){
+  public increaseGridSize(){
     this.gridCellHeight++;
     this.gridCellWidth++;
 

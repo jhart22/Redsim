@@ -2,7 +2,10 @@
   <mat-toolbar>
     <span>{{title}}</span>
     <span class="example-fill-remaining-space"></span>
-    <span>Tool feature buttons will be here</span>
+    <span>
+      <button (click)="decreaseGridSize()">-</button>
+      <button (click)="increaseGridSize()">+</button>
+    </span>
   </mat-toolbar>
   <mat-drawer-container>
     <mat-drawer  disableClose="true" mode="side" opened>

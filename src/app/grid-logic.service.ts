@@ -7,8 +7,8 @@ export class GridLogicService {
   private grid: string[][];
 
   //these values are currently defined; they will at some point be dynamic
-  private width: number = 40;
-  private height: number = 22;
+  private width: number = 100;
+  private height: number = 100;
 
   constructor() { 
     console.log("Grid logic service constructed");
