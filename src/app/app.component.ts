@@ -24,11 +24,27 @@ export class AppComponent {
     }
   }
 
-  private increaseGridSize(){
-    this.workspaceComponent.increaseGridSize();
+  private increaseGridHeight(){
+    this.workspaceComponent.gridCellHeight++;
+    this.workspaceComponent.updateCanvasSize();
   }
 
-  private decreaseGridSize(){
-    this.workspaceComponent.decreaseGridSize();
+  private decreaseGridHeight(){
+    if(this.workspaceComponent.gridCellHeight > 1){
+      this.workspaceComponent.gridCellHeight--;
+      this.workspaceComponent.updateCanvasSize();
+    }
+  }
+
+  private increaseGridWidth(){
+    this.workspaceComponent.gridCellWidth++;
+    this.workspaceComponent.updateCanvasSize();
+  }
+
+  private decreaseGridWidth(){
+    if(this.workspaceComponent.gridCellWidth > 1){
+      this.workspaceComponent.gridCellWidth--;
+      this.workspaceComponent.updateCanvasSize();
+    }
   }
 }

@@ -1,4 +1,4 @@
-html, body {margin: 0; height: 100%; overflow: visible}
+html, body {margin: 0; height: 100%;}
 
 mat-drawer {
     width: 250px;
@@ -25,6 +25,6 @@ mat-toolbar{
 
 .example-fill-remaining-space {
     /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
+        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
-  }
+}

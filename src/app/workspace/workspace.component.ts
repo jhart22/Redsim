@@ -12,8 +12,8 @@ export class WorkspaceComponent implements AfterViewInit {
   @Input() increaseSizeButton;
   @ViewChild('canvas') public canvas: ElementRef;
 
-  private gridCellWidth = 40;
-  private gridCellHeight = 22;
+  public gridCellWidth = 40;
+  public gridCellHeight = 22;
 
   private cellPixelWidth = 30;
   private cellPixelHeight = 30;
@@ -127,26 +127,19 @@ export class WorkspaceComponent implements AfterViewInit {
   }
 
   public decreaseGridSize(){
-    this.gridCellHeight--;
-    this.gridCellWidth--;
-
-    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
-    this.context = canvasEl.getContext('2d');
-
-    
-    this.gridPixelWidth = (this.gridCellWidth * this.cellPixelWidth) + 1;
-    this.gridPixelHeight = (this.gridCellHeight * this.cellPixelHeight) + 1;
-
-    canvasEl.width = this.gridPixelWidth;
-    canvasEl.height = this.gridPixelHeight;
-    this.drawGrid();
-    this.updateGridGraphics();
+    if(this.gridCellHeight > 1 && this.gridCellWidth > 1){
+      this.gridCellHeight--;
+      this.gridCellWidth--;
+      this.updateCanvasSize();
+    }
   }
 
-  public increaseGridSize(){
+  public increaseGridHeight(){
     this.gridCellHeight++;
-    this.gridCellWidth++;
+    this.updateCanvasSize();
+  }
 
+  public updateCanvasSize(){
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.context = canvasEl.getContext('2d');
 

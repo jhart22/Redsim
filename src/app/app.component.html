@@ -3,8 +3,11 @@
     <span>{{title}}</span>
     <span class="example-fill-remaining-space"></span>
     <span>
-      <button (click)="decreaseGridSize()">-</button>
-      <button (click)="increaseGridSize()">+</button>
+      <button (click)="decreaseGridWidth()">↔-</button>
+      <button (click)="increaseGridWidth()">↔+</button>
+      &nbsp;
+      <button (click)="decreaseGridHeight()">↕-</button>
+      <button (click)="increaseGridHeight()">↕+</button>
     </span>
   </mat-toolbar>
   <mat-drawer-container>
