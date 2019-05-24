@@ -15,8 +15,8 @@ export class WorkspaceComponent implements AfterViewInit {
   public gridCellWidth = 40;
   public gridCellHeight = 22;
 
-  private cellPixelWidth = 30;
-  private cellPixelHeight = 30;
+  public cellPixelWidth = 30;
+  public cellPixelHeight = 30;
 
   private gridPixelWidth = (this.gridCellWidth * this.cellPixelWidth) + 1;
   private gridPixelHeight = (this.gridCellHeight * this.cellPixelHeight) + 1;

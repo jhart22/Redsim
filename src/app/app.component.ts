@@ -47,4 +47,18 @@ export class AppComponent {
       this.workspaceComponent.updateCanvasSize();
     }
   }
+
+  private zoomGridOut(){
+    if(this.workspaceComponent.cellPixelHeight > 5){
+      this.workspaceComponent.cellPixelHeight-=5;
+      this.workspaceComponent.cellPixelWidth-=5;
+      this.workspaceComponent.updateCanvasSize();
+    }
+  }
+
+  private zoomGridIn(){
+    this.workspaceComponent.cellPixelHeight+=5;
+    this.workspaceComponent.cellPixelWidth+=5;
+    this.workspaceComponent.updateCanvasSize();
+  }
 }
