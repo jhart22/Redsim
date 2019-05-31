@@ -74,8 +74,8 @@ export class WorkspaceComponent implements AfterViewInit {
 
     var rect = event.target.getBoundingClientRect();
     //this gross formula converts mouse coordinates to grid location
-    let x = (-1* Math.ceil((rect.left - event.pageX)/this.cellPixelWidth));
-    let y = (-1 * Math.ceil((rect.top - event.pageY)/this.cellPixelHeight));
+    let x = (-1* Math.ceil((rect.left - event.clientX)/this.cellPixelWidth));
+    let y = (-1 * Math.ceil((rect.top - event.clientY)/this.cellPixelHeight));
 
     //this passes the changes to the logic handler
     this.gridLogic.updateGrid(x,y,this.toolSelector.getTool())
